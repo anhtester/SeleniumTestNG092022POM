@@ -1,9 +1,6 @@
 package anhtester.com.keywords;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,7 +37,30 @@ public class WebUI {
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
-    public static Boolean checkElementExist(WebDriver driver, By by) {
+    public static boolean verifyElementVisible(WebDriver driver, By by, int second) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second), Duration.ofMillis(500));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+            return true;
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public static boolean verifyElementNotVisible(WebDriver driver, By by, int second) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second), Duration.ofMillis(500));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+            return true;
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean checkElementExist(WebDriver driver, By by) {
         List<WebElement> listElement = driver.findElements(by);
 
         if (listElement.size() > 0) {
