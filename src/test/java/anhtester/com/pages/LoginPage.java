@@ -48,12 +48,14 @@ public class LoginPage {
         driver.findElement(buttonLogin).click();
     }
 
-    public void login(String email, String password){
+    public DashboardPage login(String email, String password){
         driver.get(URL);
         verifyHeaderPage();
         enterEmail(email);
         enterPassword(password);
         clickOnLoginButton();
+
+        return new DashboardPage(driver);
     }
 
     public void loginInvalidEmail(String email, String password){

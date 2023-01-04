@@ -34,9 +34,11 @@ public class DashboardPage {
     }
 
     //Hàm xử lý
-    public void openCustomerPage(){
+    public CustomersPage openCustomerPage(){
         WebUI.waitForPageLoaded(driver);
         driver.findElement(menuCustomer).click();
+
+        return new CustomersPage(driver);
     }
 
     public void clickCheckboxQuickStatistics(){

@@ -21,7 +21,7 @@ public class CustomersPage {
     public void verifyCustomersPage() {
         Assert.assertEquals(driver.getCurrentUrl(), PAGE_URL, "URL chưa đúng trang Customers.");
         Assert.assertTrue(WebUI.checkElementExist(driver, headerPageCustomers), "Header Page Customers not existing.");
-        Assert.assertEquals(driver.findElement(headerPageCustomers).getText(), "Customers Report", "Header Page of Customers page not match.");
+        Assert.assertEquals(driver.findElement(headerPageCustomers).getText(), "Customers Summary", "Header Page of Customers page not match.");
 
     }
 

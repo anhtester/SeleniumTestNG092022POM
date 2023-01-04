@@ -17,23 +17,26 @@ public class DashboardTest extends BaseTest {
     @Test
     public void testOpenMenuOnDashboard() {
         loginPage = new LoginPage(driver);
-        loginPage.login("admin@example.com", "123456");
+
+        //Liên kết trang được xảy ra nhờ hàm login trả về là sự khởi tạo của trang Dashboard
+        dashboardPage = loginPage.login("admin@example.com", "123456");
 
         //Kiểm tra trang Dashboard là đúng
-        dashboardPage = new DashboardPage(driver);
         dashboardPage.verifyDashboardPage();
 
         //Kiểm tra menu Customers click vào mở được trang
-        dashboardPage.openCustomerPage();
-        customersPage = new CustomersPage(driver);
+        customersPage = dashboardPage.openCustomerPage();
+
         customersPage.verifyCustomersPage();
     }
 
     @Test
     public void testFilterWidgetsOnDashboard() {
         loginPage = new LoginPage(driver);
-        loginPage.login("admin@example.com", "123456");
-        dashboardPage = new DashboardPage(driver);
+
+        //Liên kết trang rồi
+        dashboardPage = loginPage.login("admin@example.com", "123456");
+
         dashboardPage.verifyDashboardPage();
         //Check Filter Widgets on Dashboard
         dashboardPage.verifyFilterStatistics();
