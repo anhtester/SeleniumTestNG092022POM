@@ -1,6 +1,7 @@
 package anhtester.com.common;
 
 import anhtester.com.keywords.WebUI;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -14,6 +15,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void createBrowser() {
+        WebDriverManager.chromedriver().setup();
         System.out.println("Start Chrome browser from BaseTest...");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
