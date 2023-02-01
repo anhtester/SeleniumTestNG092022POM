@@ -1,11 +1,9 @@
 package anhtester.com.testcases;
 
 import anhtester.com.common.BaseTest;
-import anhtester.com.pages.CustomersPage;
+import anhtester.com.pages.customers.CustomersPage;
 import anhtester.com.pages.DashboardPage;
 import anhtester.com.pages.LoginPage;
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DashboardTest extends BaseTest {

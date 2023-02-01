@@ -1,7 +1,7 @@
 package anhtester.com.pages;
 
 import anhtester.com.keywords.WebUI;
-import anhtester.com.testcases.DashboardTest;
+import anhtester.com.pages.customers.CustomersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

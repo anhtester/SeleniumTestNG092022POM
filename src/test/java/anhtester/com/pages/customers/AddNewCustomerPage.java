@@ -1,4 +1,4 @@
-package anhtester.com.pages;
+package anhtester.com.pages.customers;
 
 import anhtester.com.keywords.WebUI;
 import org.openqa.selenium.By;
@@ -10,13 +10,13 @@ public class AddNewCustomerPage {
     private String PAGE_URL = "https://crm.anhtester.com/admin/clients/client";
     private String PAGE_TEXT = "Customer Details";
 
-    private By tabCustomerDetail = By.xpath("//a[@aria-controls='contact_info']");
-    private By company = By.xpath("//input[@id='company']");
-    private By vat = By.xpath("//input[@id='vat']");
-    private By phoneNumber = By.xpath("//input[@id='phonenumber']");
-    private By website = By.xpath("//input[@id='website']");
-    private By dropdownGroups = By.xpath("//label[@for='groups_in[]']/following-sibling::div");
-    private By inputGroups = By.xpath("//label[@for='groups_in[]']/following-sibling::div//input[@type='search']");
+    public By tabCustomerDetail = By.xpath("//a[@aria-controls='contact_info']");
+    public By company = By.xpath("//input[@id='company']");
+    public By vat = By.xpath("//input[@id='vat']");
+    public By phoneNumber = By.xpath("//input[@id='phonenumber']");
+    public By website = By.xpath("//input[@id='website']");
+    public By dropdownGroups = By.xpath("//label[@for='groups_in[]']/following-sibling::div");
+    public By inputGroups = By.xpath("//label[@for='groups_in[]']/following-sibling::div//input[@type='search']");
     private By currency = By.xpath("//button[@data-id='default_currency']");
     private By language = By.xpath("//button[@data-id='default_language']");
     private By address = By.xpath("//textarea[@id='address']");
