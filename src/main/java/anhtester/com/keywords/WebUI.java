@@ -11,6 +11,58 @@ import java.util.List;
 
 public class WebUI {
 
+    private static WebDriver driver;
+    public WebUI(WebDriver _driver){
+        driver = _driver;
+    }
+
+    public static WebElement getWebElement(By by){
+        return driver.findElement(by);
+    }
+
+    public static void openURL(String URL){
+        driver.get(URL);
+        waitForPageLoaded();
+    }
+
+    public static String getCurrentUrl(){
+        return driver.getCurrentUrl();
+    }
+
+    public static void clickElement(By by){
+        getWebElement(by).click();
+    }
+
+    public static void setText(By by, String value){
+        getWebElement(by).sendKeys(value);
+    }
+
+    public static String getTextElement(By by){
+        return getWebElement(by).getText();
+    }
+
+    public static String getAttributeElement(By by, String attributeName){
+        return getWebElement(by).getAttribute(attributeName);
+    }
+
+    public static void scrollToElementWithJS(By by){
+        //Dùng Actions class
+        //Robot class
+        //Dùng JavascriptExecutor
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", getWebElement(by));
+    }
+
+    public static void scrollToElement(By by){
+        //Dùng Actions class
+
+    }
+
+    public static void scrollToElementWithRobot(By by){
+        //Dùng Robot class
+
+    }
+
     public static void sleep(double second) {
         try {
             Thread.sleep((long) (1000 * second));
@@ -19,25 +71,25 @@ public class WebUI {
         }
     }
 
-    public static void waitForElementVisible(WebDriver driver, By by, int second) {
+    public static void waitForElementVisible(By by, int second) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second), Duration.ofMillis(500));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
-    public static void waitForElementPresent(WebDriver driver, By by, int second) {
+    public static void waitForElementPresent(By by, int second) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second));
 
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    public static void waitForElementClickable(WebDriver driver, By by, int second) {
+    public static void waitForElementClickable(By by, int second) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second));
 
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
-    public static boolean verifyElementVisible(WebDriver driver, By by, int second) {
+    public static boolean verifyElementVisible(By by, int second) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second), Duration.ofMillis(500));
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -49,7 +101,7 @@ public class WebUI {
 
     }
 
-    public static boolean verifyElementNotVisible(WebDriver driver, By by, int second) {
+    public static boolean verifyElementNotVisible(By by, int second) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second), Duration.ofMillis(500));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -60,7 +112,7 @@ public class WebUI {
         }
     }
 
-    public static boolean checkElementExist(WebDriver driver, By by) {
+    public static boolean checkElementExist(By by) {
         List<WebElement> listElement = driver.findElements(by);
 
         if (listElement.size() > 0) {
@@ -72,7 +124,7 @@ public class WebUI {
         }
     }
 
-    public static Boolean checkElementExist(WebDriver driver, String xpath) {
+    public static Boolean checkElementExist(String xpath) {
         List<WebElement> listElement = driver.findElements(By.xpath(xpath));
 
         if (listElement.size() > 0) {
@@ -88,7 +140,7 @@ public class WebUI {
      * Wait for Page loaded
      * Chờ đợi trang tải xong (Javascript tải xong)
      */
-    public static void waitForPageLoaded(WebDriver driver) {
+    public static void waitForPageLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(500));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 

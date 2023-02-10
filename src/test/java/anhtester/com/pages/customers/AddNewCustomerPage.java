@@ -1,6 +1,7 @@
 package anhtester.com.pages.customers;
 
 import anhtester.com.keywords.WebUI;
+import static anhtester.com.keywords.WebUI.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -31,25 +32,32 @@ public class AddNewCustomerPage {
 
     public AddNewCustomerPage(WebDriver _driver) {
         driver = _driver;
+        new WebUI(driver); //Khởi tạo class WebUI để truyền giá trị driver từ bên ngoài vào WebUI
+    }
+
+    public void selectGroups(String groupName){
+        clickElement(dropdownGroups);
+        getWebElement(inputGroups).sendKeys(groupName, Keys.ENTER);
+        clickElement(dropdownGroups);
     }
 
     public void AddDataNewCustomer(String CUSTOMER_NAME) {
-        WebUI.waitForPageLoaded(driver);
-        driver.findElement(company).sendKeys(CUSTOMER_NAME);
-        driver.findElement(vat).sendKeys("10");
-        driver.findElement(phoneNumber).sendKeys("0123456789");
-        driver.findElement(website).sendKeys("https://anhtester.com");
-        driver.findElement(dropdownGroups).click();
-        driver.findElement(inputGroups).sendKeys("Gold", Keys.ENTER);
-        driver.findElement(dropdownGroups).click();
-        driver.findElement(address).sendKeys("Vietnam");
-        driver.findElement(city).sendKeys("Can Tho");
-        driver.findElement(state).sendKeys("Can Tho");
-        driver.findElement(zipcode).sendKeys("92000");
-        driver.findElement(dropdownCountry).click();
-        driver.findElement(inputCountry).sendKeys("Vietnam", Keys.ENTER);
-        driver.findElement(buttonSave).click();
-        WebUI.waitForPageLoaded(driver);
+        WebUI.waitForPageLoaded();
+
+        setText(company, CUSTOMER_NAME);
+        setText(vat, "10");
+        setText(phoneNumber, "0123456789");
+        setText(website, "https://anhtester.com");
+        selectGroups("Gold");
+        setText(address, "Vietnam");
+        setText(city, "Can Tho");
+        setText(state, "Can Tho");
+        setText(zipcode, "92000");
+        clickElement(dropdownCountry);
+        getWebElement(inputCountry).sendKeys("Vietnam", Keys.ENTER);
+        clickElement(buttonSave);
+
+        WebUI.waitForPageLoaded();
     }
 
 }

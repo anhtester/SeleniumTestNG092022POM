@@ -1,6 +1,7 @@
 package anhtester.com.pages.customers;
 
 import anhtester.com.keywords.WebUI;
+import static anhtester.com.keywords.WebUI.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -23,33 +24,37 @@ public class CustomersPage {
 
     public CustomersPage(WebDriver _driver) {
         driver = _driver;
+        new WebUI(driver);
     }
 
     //Các hàm xử lý cho chức năng thuộc Customers Page
     public void verifyCustomersPage() {
-        Assert.assertEquals(driver.getCurrentUrl(), PAGE_URL, "URL chưa đúng trang Customers.");
-        Assert.assertTrue(WebUI.checkElementExist(driver, headerPageCustomers), "Header Page Customers not existing.");
-        Assert.assertEquals(driver.findElement(headerPageCustomers).getText(), PAGE_TEXT, "Header Page of Customers page not match.");
+        Assert.assertEquals(getCurrentUrl(), PAGE_URL, "URL chưa đúng trang Customers.");
+        Assert.assertTrue(checkElementExist(headerPageCustomers), "Header Page Customers not existing.");
+        Assert.assertEquals(getTextElement(headerPageCustomers), PAGE_TEXT, "Header Page of Customers page not match.");
 
     }
 
     public AddNewCustomerPage clickNewCustomerButton(){
-        WebUI.waitForElementVisible(driver, buttonAddCustomer, 10);
-        driver.findElement(buttonAddCustomer).click();
+        waitForElementVisible(buttonAddCustomer, 10);
+        //driver.findElement(buttonAddCustomer).click();
+        clickElement(buttonAddCustomer);
         return new AddNewCustomerPage(driver);
     }
 
     public void searchCustomer(String companyName){
-        WebUI.waitForPageLoaded(driver);
-        WebUI.waitForElementVisible(driver, inputSearch, 10);
-        driver.findElement(inputSearch).sendKeys(companyName);
-        WebUI.sleep(2);
+        waitForPageLoaded();
+        waitForElementVisible(inputSearch, 10);
+        //driver.findElement(inputSearch).sendKeys(companyName);
+        setText(inputSearch, companyName);
+        sleep(2);
     }
 
     public CustomerDetailPage clickOnFirstRowCustomerName(){
-        WebUI.waitForPageLoaded(driver);
-        WebUI.waitForElementVisible(driver, tdCustomerName, 10);
-        driver.findElement(tdCustomerName).click();
+        waitForPageLoaded();
+        waitForElementVisible(tdCustomerName, 10);
+        //driver.findElement(tdCustomerName).click();
+        clickElement(tdCustomerName);
 
         return new CustomerDetailPage(driver);
     }

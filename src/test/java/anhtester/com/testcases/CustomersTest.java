@@ -28,7 +28,7 @@ public class CustomersTest extends BaseTest {
         addCustomerPage = customersPage.clickNewCustomerButton();
 
         //Addison, Joseph, Adorno, Theodor, Keiko, Bailey, Philip James
-        String CUSTOMER_NAME = "Adorno";
+        String CUSTOMER_NAME = "Theodor";
         addCustomerPage.AddDataNewCustomer(CUSTOMER_NAME);
 
         //Mở lại trang Customer

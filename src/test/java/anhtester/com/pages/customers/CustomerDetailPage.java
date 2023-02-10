@@ -1,6 +1,7 @@
 package anhtester.com.pages.customers;
 
 import anhtester.com.keywords.WebUI;
+import static anhtester.com.keywords.WebUI.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -17,19 +18,20 @@ public class CustomerDetailPage extends AddNewCustomerPage {
     public CustomerDetailPage(WebDriver _driver) {
         super(_driver);
         driver = _driver;
+        new WebUI(driver);
     }
 
     public void checkCustomerDetail(String customerName) {
-        WebUI.waitForPageLoaded(driver);
-        System.out.println(driver.findElement(company).getAttribute("value"));
-        System.out.println(driver.findElement(vat).getAttribute("value"));
-        System.out.println(driver.findElement(phoneNumber).getAttribute("value"));
+        WebUI.waitForPageLoaded();
+        System.out.println(getAttributeElement(company, "value"));
+        System.out.println(getAttributeElement(vat, "value"));
+        System.out.println(getAttributeElement(phoneNumber, "value"));
 
         //Kiểm tra thì phải dùng Assert
         //Phải dùng Equals chứ không nên dùng Contains vì giá trị phải đúng chính xác
-        Assert.assertEquals(driver.findElement(company).getAttribute("value"), customerName, "Company Name not match.");
-        Assert.assertEquals(driver.findElement(vat).getAttribute("value"), "10", "VAT not match.");
-        Assert.assertEquals(driver.findElement(phoneNumber).getAttribute("value"), "0123456789", "Phone Number not match.");
+        Assert.assertEquals(getAttributeElement(company, "value"), customerName, "Company Name not match.");
+        Assert.assertEquals(getAttributeElement(vat, "value"), "10", "VAT not match.");
+        Assert.assertEquals(getAttributeElement(phoneNumber, "value"), "0123456789", "Phone Number not match.");
 
     }
 

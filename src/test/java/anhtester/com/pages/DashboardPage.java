@@ -1,6 +1,9 @@
 package anhtester.com.pages;
 
 import anhtester.com.keywords.WebUI;
+
+import static anhtester.com.keywords.WebUI.*;
+
 import anhtester.com.pages.customers.CustomersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,38 +25,42 @@ public class DashboardPage {
 
     //Hàm xây dựng
     private WebDriver driver;
-    public DashboardPage(WebDriver _driver){
+
+    public DashboardPage(WebDriver _driver) {
         driver = _driver;
+        new WebUI(driver);
     }
 
-    public void verifyDashboardPage(){
+    public void verifyDashboardPage() {
         //Kiểm tra URL chứa phần thuộc trang DB
         //Kiểm tra Text hoặc Object chỉ có trang DB có
-        Assert.assertEquals(driver.getCurrentUrl(), PAGE_URL, "URL chưa đúng trang Dashboard.");
-        Assert.assertTrue(WebUI.checkElementExist(driver, buttonOptionDashboard), "Dashboard Options not existing.");
+        Assert.assertEquals(getCurrentUrl(), PAGE_URL, "URL chưa đúng trang Dashboard.");
+        Assert.assertTrue(checkElementExist(buttonOptionDashboard), "Dashboard Options not existing.");
     }
 
     //Hàm xử lý
-    public CustomersPage openCustomerPage(){
-        WebUI.waitForPageLoaded(driver);
-        driver.findElement(menuCustomer).click();
-
+    public CustomersPage openCustomerPage() {
+        waitForPageLoaded();
+        //driver.findElement(menuCustomer).click();
+        clickElement(menuCustomer);
         return new CustomersPage(driver);
     }
 
-    public void clickCheckboxQuickStatistics(){
-        driver.findElement(buttonOptionDashboard).click();
-        WebUI.waitForElementVisible(driver, checkboxQuickStatistics, 5);
-        driver.findElement(checkboxQuickStatistics).click();
+    public void clickCheckboxQuickStatistics() {
+        //driver.findElement(buttonOptionDashboard).click();
+        clickElement(buttonOptionDashboard);
+        waitForElementVisible(checkboxQuickStatistics, 5);
+        //driver.findElement(checkboxQuickStatistics).click();
+        clickElement(checkboxQuickStatistics);
     }
 
-    public void verifyFilterStatistics(){
+    public void verifyFilterStatistics() {
         //Kiểm tra widget này đang hiển thị (visible)
-        Assert.assertTrue(WebUI.verifyElementVisible(driver, widgetStatistics, 5), "The Widget Statistics default does not visible.");
+        Assert.assertTrue(verifyElementVisible(widgetStatistics, 5), "The Widget Statistics default does not visible.");
         //Nhấn uncheck this widget
         clickCheckboxQuickStatistics();
         //Kiểm tra widget trên đã bị ẩn (not visible)
-        Assert.assertTrue(WebUI.verifyElementNotVisible(driver, widgetStatistics, 5), "The Widget Statistics is visible.");
+        Assert.assertTrue(verifyElementNotVisible(widgetStatistics, 5), "The Widget Statistics is visible.");
 
     }
 

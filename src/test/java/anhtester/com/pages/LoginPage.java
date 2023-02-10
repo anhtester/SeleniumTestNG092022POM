@@ -1,5 +1,7 @@
 package anhtester.com.pages;
 
+import anhtester.com.keywords.WebUI;
+import static anhtester.com.keywords.WebUI.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.bidi.log.Log;
@@ -23,43 +25,50 @@ public class LoginPage {
 
     public LoginPage(WebDriver _driver){
         driver = _driver;
+        new WebUI(driver);
     }
 
     //Viết các hàm xử lý cho trang Login
     public void verifyHeaderPage(){
-        Assert.assertEquals(driver.findElement(headerPage).getText(), "Login", "FAIL. Header not match.");
+        Assert.assertEquals(getTextElement(headerPage), "Login", "FAIL. Header not match.");
     }
 
     public void verifyErrorMessageDisplay(){
-        Assert.assertTrue(driver.findElement(messageErrorEmail).isDisplayed(), "FAIL. Error message no displays.");
-        Assert.assertEquals(driver.findElement(messageErrorEmail).getText(), "Invalid email or password", "FAIL. Content of the Error message not match.");
+        Assert.assertTrue(getWebElement(messageErrorEmail).isDisplayed(), "FAIL. Error message no displays.");
+        Assert.assertEquals(getTextElement(messageErrorEmail), "Invalid email or password", "FAIL. Content of the Error message not match.");
 
     }
 
     public void enterEmail(String email){
-        driver.findElement(inputEmail).sendKeys(email);
+
+        //driver.findElement(inputEmail).sendKeys(email);
+        setText(inputEmail, email);
     }
 
     public void enterPassword(String password){
-        driver.findElement(inputPassword).sendKeys(password);
+        //driver.findElement(inputPassword).sendKeys(password);
+        setText(inputPassword, password);
     }
 
     public void clickOnLoginButton(){
-        driver.findElement(buttonLogin).click();
+        //driver.findElement(buttonLogin).click();
+        clickElement(buttonLogin);
     }
 
     public DashboardPage login(String email, String password){
-        driver.get(URL);
+        openURL(URL);
         verifyHeaderPage();
         enterEmail(email);
+        //setText(inputEmail, email);
         enterPassword(password);
+        //setText(inputPassword, password);
         clickOnLoginButton();
 
         return new DashboardPage(driver);
     }
 
     public void loginInvalidEmail(String email, String password){
-        driver.get(URL);
+        openURL(URL);
         verifyHeaderPage();
         enterEmail(email);
         enterPassword(password);
