@@ -42,7 +42,7 @@ public class AddNewCustomerPage {
     }
 
     public void AddDataNewCustomer(String CUSTOMER_NAME) {
-        WebUI.waitForPageLoaded();
+        waitForPageLoaded();
 
         setText(company, CUSTOMER_NAME);
         setText(vat, "10");
@@ -57,7 +57,7 @@ public class AddNewCustomerPage {
         getWebElement(inputCountry).sendKeys("Vietnam", Keys.ENTER);
         clickElement(buttonSave);
 
-        WebUI.waitForPageLoaded();
+        waitForPageLoaded();
     }
 
 }

@@ -36,24 +36,18 @@ public class CustomersPage {
     }
 
     public AddNewCustomerPage clickNewCustomerButton(){
-        waitForElementVisible(buttonAddCustomer, 10);
-        //driver.findElement(buttonAddCustomer).click();
         clickElement(buttonAddCustomer);
         return new AddNewCustomerPage(driver);
     }
 
     public void searchCustomer(String companyName){
         waitForPageLoaded();
-        waitForElementVisible(inputSearch, 10);
-        //driver.findElement(inputSearch).sendKeys(companyName);
         setText(inputSearch, companyName);
         sleep(2);
     }
 
     public CustomerDetailPage clickOnFirstRowCustomerName(){
         waitForPageLoaded();
-        waitForElementVisible(tdCustomerName, 10);
-        //driver.findElement(tdCustomerName).click();
         clickElement(tdCustomerName);
 
         return new CustomerDetailPage(driver);

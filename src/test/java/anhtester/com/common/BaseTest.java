@@ -28,6 +28,6 @@ public class BaseTest {
     public void closeBrowser() {
         WebUI.sleep(2);
         System.out.println("Close browser from BaseTest...");
-        //driver.quit();
+        driver.quit();
     }
 }

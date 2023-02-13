@@ -41,16 +41,12 @@ public class DashboardPage {
     //Hàm xử lý
     public CustomersPage openCustomerPage() {
         waitForPageLoaded();
-        //driver.findElement(menuCustomer).click();
         clickElement(menuCustomer);
         return new CustomersPage(driver);
     }
 
     public void clickCheckboxQuickStatistics() {
-        //driver.findElement(buttonOptionDashboard).click();
         clickElement(buttonOptionDashboard);
-        waitForElementVisible(checkboxQuickStatistics, 5);
-        //driver.findElement(checkboxQuickStatistics).click();
         clickElement(checkboxQuickStatistics);
     }
 

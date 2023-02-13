@@ -40,18 +40,14 @@ public class LoginPage {
     }
 
     public void enterEmail(String email){
-
-        //driver.findElement(inputEmail).sendKeys(email);
         setText(inputEmail, email);
     }
 
     public void enterPassword(String password){
-        //driver.findElement(inputPassword).sendKeys(password);
         setText(inputPassword, password);
     }
 
     public void clickOnLoginButton(){
-        //driver.findElement(buttonLogin).click();
         clickElement(buttonLogin);
     }
 
@@ -59,9 +55,7 @@ public class LoginPage {
         openURL(URL);
         verifyHeaderPage();
         enterEmail(email);
-        //setText(inputEmail, email);
         enterPassword(password);
-        //setText(inputPassword, password);
         clickOnLoginButton();
 
         return new DashboardPage(driver);
