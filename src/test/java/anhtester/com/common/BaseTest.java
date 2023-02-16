@@ -1,33 +1,76 @@
 package anhtester.com.common;
 
-import anhtester.com.keywords.WebUI;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import java.time.Duration;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.*;
 
 public class BaseTest {
 
-    public WebDriver driver;
+    public static WebDriver driver;
 
     @BeforeMethod
-    public void createBrowser() {
+    @Parameters({"browser"})
+    public static void createDriver(@Optional("chrome") String browser) {
+        setupDriver(browser);
+    }
+
+    public static WebDriver setupDriver(String browserName) {
+        switch (browserName.trim().toLowerCase()) {
+            case "chrome":
+                driver = initChromeDriver();
+                break;
+            case "firefox":
+                driver = initFirefoxDriver();
+                break;
+            case "edge":
+                driver = initEdgeDriver();
+                break;
+            default:
+                System.out.println("Browser: " + browserName + " is invalid, Launching Chrome as browser of choice...");
+                driver = initChromeDriver();
+        }
+        return driver;
+    }
+
+    private static WebDriver initChromeDriver() {
+        System.out.println("Launching Chrome browser...");
         WebDriverManager.chromedriver().setup();
-        System.out.println("Start Chrome browser from BaseTest...");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        return driver;
+    }
 
-        //Chờ đợi trang load xong (trong 40s)
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(40));
+    private static WebDriver initEdgeDriver() {
+        System.out.println("Launching Edge browser...");
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        driver.manage().window().maximize();
+        return driver;
+    }
+
+    private static WebDriver initFirefoxDriver() {
+        System.out.println("Launching Firefox browser...");
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        return driver;
     }
 
     @AfterMethod
-    public void closeBrowser() {
-        WebUI.sleep(2);
-        System.out.println("Close browser from BaseTest...");
-        driver.quit();
+    public static void closeDriver() {
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); //Reset timeout
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(driver != null) {
+            driver.quit();
+        }
     }
+
 }
