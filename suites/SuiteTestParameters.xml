@@ -7,16 +7,15 @@
         <parameter name="number1" value="20"/>
         <parameter name="message" value="Selenium !!"/>
         <classes>
-            <class name="anhtester.com.testcases.TestParameters" />
+            <class name="anhtester.com.testcases.TestParameters"/>
         </classes>
     </test>
 
     <test name="Test Parameters 2">
         <parameter name="number1" value="20"/>
         <parameter name="message" value="Hello Teams !!"/>
-
         <classes>
-            <class name="anhtester.com.testcases.TestParameters" />
+            <class name="anhtester.com.testcases.TestParameters"/>
         </classes>
     </test>
 
