@@ -17,8 +17,8 @@ public class BaseTest {
       @BeforeMethod
       @Parameters({"browser"})
       public static void createDriver(@Optional("chrome") String browser) {
+            System.setProperty("webdriver.http.factory", "jdk-http-client");
             setupDriver(browser);
-            
       }
 
       public static WebDriver setupDriver(String browserName) {
