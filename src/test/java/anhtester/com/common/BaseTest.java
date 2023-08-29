@@ -12,16 +12,16 @@ import org.testng.annotations.Parameters;
 
 public class BaseTest {
 
-      public static WebDriver driver;
+      public WebDriver driver;
 
       @BeforeMethod
       @Parameters({"browser"})
-      public static void createDriver(@Optional("chrome") String browser) {
-            System.setProperty("webdriver.http.factory", "jdk-http-client");
+      public void createDriver(@Optional("chrome") String browser) {
+            System.setProperty("webdriver.http.factory", "jdk-http-client"); //Fix warning Connection reset
             setupDriver(browser);
       }
 
-      public static WebDriver setupDriver(String browserName) {
+      public WebDriver setupDriver(String browserName) {
             switch (browserName.trim().toLowerCase()) {
                   case "chrome":
                         driver = initChromeDriver();
@@ -39,39 +39,33 @@ public class BaseTest {
             return driver;
       }
 
-      private static WebDriver initChromeDriver() {
+      private WebDriver initChromeDriver() {
             System.out.println("Launching Chrome browser...");
-            WebDriverManager.chromedriver().setup();
+            //WebDriverManager.chromedriver().setup(); //Selenium 4.11.0 về sau không cần dùng WDM
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             return driver;
       }
 
-      private static WebDriver initEdgeDriver() {
+      private WebDriver initEdgeDriver() {
             System.out.println("Launching Edge browser...");
-            WebDriverManager.edgedriver().setup();
+            //WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
             driver.manage().window().maximize();
             return driver;
       }
 
-      private static WebDriver initFirefoxDriver() {
+      private WebDriver initFirefoxDriver() {
             System.out.println("Launching Firefox browser...");
-            WebDriverManager.firefoxdriver().setup();
+            //WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
             return driver;
       }
 
       @AfterMethod
-      public static void closeDriver() {
+      public void closeDriver() {
             //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); //Reset timeout
-            try {
-                  Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                  throw new RuntimeException(e);
-            }
-
             if (driver != null) {
                   driver.quit();
             }
