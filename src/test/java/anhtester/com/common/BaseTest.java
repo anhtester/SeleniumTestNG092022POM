@@ -17,7 +17,6 @@ public class BaseTest {
       @BeforeMethod
       @Parameters({"browser"})
       public void createDriver(@Optional("chrome") String browser) {
-            System.setProperty("webdriver.http.factory", "jdk-http-client"); //Fix warning Connection reset
             setupDriver(browser);
       }
 
